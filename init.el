@@ -4,6 +4,8 @@
     (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) 
 
+
+
 ;; -*- mode: elisp -*-
 
 ;; Disable the splash screen (enable it again replacing the t with 0)
@@ -94,12 +96,71 @@
  (menu-bar-mode -1)
 
 
-(setq-default frame-title-format
-      (list '((buffer-file-name " %f"
-		(dired-directory
-		 dired-directory
-		 (revert-buffer-function " %b"
-			 ("%b - Dir:  "
-			  default-directory)))))))
+
+;; web-mode
 
 
+;; Atomatically load web-mode when opening web-related files
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+
+
+;; Indentations
+( defun my-web-mode-hook ()
+"Hooks for Web mode."
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+(setq tab-width 2)
+
+;; Highlight of columns
+(setq web-mode-enable-current-column-highlight t)
+(setq web-mode-enable-current-element-highlight t)
+
+;; Company settings
+ (defun my-web-mode-hook ()
+  (set (make-local-variable 'company-backends) '(company-css company-web-html  company-yasnippet company-files))
+  )
+
+;; Emmet settings
+(add-hook 'web-mode-hook  'emmet-mode) 
+
+(add-hook 'web-mode-before-auto-complete-hooks
+	  '(lambda ()
+	     (let ((web-mode-cur-language
+		    (web-mode-language-at-pos)))
+;; problems	       (if (string= web-mode-cur-language "php") 
+;; with 		   (yas-activate-extra-mode 'php-mode)
+;; ternjs		 (yas-deactivate-extra-mode 'php-mode))
+	       (if (string= web-mode-cur-language "css")
+		   (setq emmet-use-css-transform t)
+		 (setq emmet-use-css-transform nil)))))
+
+;; tern and tern-auto-complete
+;;(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+;;(eval-after-load 'tern
+;; '(progn
+;;   (require 'tern-auto-complete)
+;;          (tern-ac-setup)))
+
+(add-hook 'web-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+           (tern-ac-setup)))
+
+
+;; enable auto-complete-mode for ternjs
+ (global-auto-complete-mode t)
+
+;; Fix error when tern does not auto refresh
+;; (defun delete-tern-process ()
+;;  (interactive)
+;;    (delete-process "Tern"))
+
+;; Fix .tern-port file problem
+(setq tern-command '("/usr/bin/tern" "--no-port-file"))
