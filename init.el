@@ -71,6 +71,7 @@
  '(custom-safe-themes
    (quote
     ("97965ccdac20cae22c5658c282544892959dc541af3e9ef8857dbf22eb70e82b" "9129c2759b8ba8e8396fe92535449de3e7ba61fd34569a488dd64e80f5041c9f" default)))
+ '(default-input-method "APL-Z")
  '(electric-indent-mode nil)
  '(evil-esc-delay 0)
  '(midnight-mode t)
@@ -115,7 +116,7 @@ git log --pretty=oneline --abbrev-commit --after=\"%<%Y-%m-%d 00:00>\"  --before
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (avy gnu-apl-mode multiple-cursors company-web json-mode dmenu zerodark-theme linum-relative highlight-blocks highlight-parentheses yasnippet-snippets which-key web-mode use-package unicode-fonts symon sudo-edit spaceline slack rainbow-delimiters racket-mode pretty-mode prettier-js popup-kill-ring pomodoro poet-theme pkg-info pdf-tools paredit ox-gfm org-trello org-bullets markdown-mode mark-multiple magit key-chord js2-mode gif-screencast geiser exwm exec-path-from-shell evil-terminal-cursor-changer emmet-mode el-get dimmer desktop+ demo-it buffer-move bitlbee beacon auto-complete)))
+    (keycast avy gnu-apl-mode multiple-cursors company-web json-mode dmenu zerodark-theme linum-relative highlight-blocks highlight-parentheses yasnippet-snippets which-key web-mode use-package unicode-fonts symon sudo-edit spaceline slack rainbow-delimiters racket-mode pretty-mode prettier-js popup-kill-ring pomodoro poet-theme pkg-info pdf-tools paredit ox-gfm org-trello org-bullets markdown-mode mark-multiple magit key-chord js2-mode gif-screencast geiser exwm exec-path-from-shell evil-terminal-cursor-changer emmet-mode el-get dimmer desktop+ demo-it buffer-move bitlbee beacon auto-complete)))
  '(popup-scroll-bar-background-face t t)
  '(prettier-js-args (quote ("--parser" "babylon")))
  '(scroll-bar-mode nil)
@@ -484,12 +485,19 @@ uses the prettify-list default."
  :config
  (evil-mode 1)
  (evil-set-initial-state 'lisp-mode    'emacs)
+ (setq  
+        evil-normal-state-cursor '(box "green")
+        evil-insert-state-cursor '((bar . 5) "red")
+        evil-visual-state-cursor '(box "gray")
+        evil-emacs-state-cursor  '(box "blue"))
  :custom
  (evil-esc-delay 0))
 
-(unless (display-graphic-p)
- (require 'evil-terminal-cursor-changer)
-  (evil-terminal-cursor-changer-activate)) ; or (etcc-on))
+;;;  EVIL TERMINAL CURSOR 
+
+; (unless (display-graphic-p)
+;  (require 'evil-terminal-cursor-changer)
+;  (evil-terminal-cursor-changer-activate)) ; or (etcc-on))
 
 (use-package which-key
   :ensure t
@@ -908,6 +916,14 @@ git log --pretty=oneline --abbrev-commit \
 
 (use-package gnu-apl-mode
   :mode (("\\.apl$" . gnu-apl-mode)))
+
+
+(use-package gif-screencast
+ :ensure t)
+
+(with-eval-after-load 'gif-screencast
+  (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
+  (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
 
 ; start-process-shell-command
 ;; Always at the end
