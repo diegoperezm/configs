@@ -74,6 +74,7 @@
  '(default-input-method "APL-Z")
  '(electric-indent-mode nil)
  '(evil-esc-delay 0)
+ '(global-whitespace-mode t)
  '(midnight-mode t)
  '(org-bullets-bullet-list (quote ("◉" "▸" "▸" "▸" "▸" "▸" "▸" "▸" "▸" "▸")))
  '(org-capture-templates
@@ -142,7 +143,9 @@ git log --pretty=oneline --abbrev-commit --after=\"%<%Y-%m-%d 00:00>\"  --before
  '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-base-face :foreground "orchid1"))))
  '(rainbow-delimiters-unmatched-face ((t (:inherit rainbow-delimiters-base-face :foreground "white"))))
  '(term-color-blue ((t (:background "deep sky blue" :foreground "deep sky blue")))))
- (set-face-attribute 'fringe nil :background "gray19") (set-background-color "gray19")
+
+(set-face-attribute 'fringe nil :background "gray19")
+(set-background-color "gray19")
 
 (add-hook 'js2-mode-hook
           (lambda ()
@@ -488,7 +491,7 @@ uses the prettify-list default."
  (setq  
         evil-normal-state-cursor '(box "green")
         evil-insert-state-cursor '((bar . 5) "red")
-        evil-visual-state-cursor '(box "gray")
+        evil-visual-state-cursor '(hollow)
         evil-emacs-state-cursor  '(box "blue"))
  :custom
  (evil-esc-delay 0))
@@ -557,7 +560,8 @@ uses the prettify-list default."
    (define-key org-mode-map "\C-ct" 'insert-current-time)
    (org-babel-do-load-languages
    'org-babel-load-languages
-   '((sql    . t)
+   '(
+     (sql    . t)
      (shell  . t) 
      (scheme . t) 
      (js     . t)
@@ -565,6 +569,8 @@ uses the prettify-list default."
      (dot    . t)))
 (add-to-list 'org-emphasis-alist '("*" (:foreground "yellow")))
 (add-to-list 'org-src-lang-modes '("js2"       .  js2))
+(add-to-list 'org-structure-template-alist
+ '("apl"  "#+NAME:?\n#+BEGIN_SRC apl\n\n#+END_SRC"))
 (add-to-list 'org-structure-template-alist
  '("sh"  "#+NAME: \n#+BEGIN_SRC sh\n?\n#+END_SRC"))
 (add-to-list 'org-structure-template-alist
@@ -591,7 +597,7 @@ uses the prettify-list default."
      (wl . wl-other-frame))))
 (org-capture-templates
  '(("W" "Worklog" entry (file "/home/erretres/Desktop/worklog.org" )
-        "*  %<[%Y-%m-%d-%a]> %i\n 
+    "*  %<[%Y-%m-%d-%a]> %i\n 
 
 
 | hrs | start    | end   | theme | topic | file       | completed? |
@@ -925,12 +931,35 @@ git log --pretty=oneline --abbrev-commit \
   (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
   (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
 
+(use-package whitespace
+  :config
+  ;; add spaces?
+  (setq whitespace-style '(face empty tabs  lines-tail trailing)
+	whitespace-line-column 80)
+  (global-whitespace-mode t)
+  :custom-face
+  (trailing-whitespace ((t (:background "red1"))))
+  (whitespace-big-indent ((t (:background "blue" :foreground "firebrick1"))))
+  (whitespace-empty ((t (:background "#da8547" :foreground "#3e4451"))))
+  (whitespace-line ((t (:foreground "#ff6c6b"))))
+  (whitespace-trailing ((t (:background "#ff6c6e" :foreground "#282c34" :inverse-video nil :weight bold)))))
+
+
+; '(trailing-whitespace ((t (:background "red"))))
+; '(whitespace-big-indent ((t (:background "red1" :foreground "firebrick1"))))
+; '(whitespace-empty ((t (:background "#da8547" :foreground "#3e4451"))))
+; '(whitespace-line ((t (:foreground "#ff6c6b"))))
+; '(whitespace-trailing ((t (:background "#ff6c6e" :foreground "#282c34" :inverse-video nil :weight bold))))
+
+
+
+ (defun org-babel-execute:apl (body params)
+  "Execute a block of apl code with org-babel."
+  (message "executing apl source code block")
+  (org-babel-eval "apl -s --echoCIN --rawCIN" body))
+
+
+
 ; start-process-shell-command
 ;; Always at the end
 (setq-default ispell-program-name "aspell")
-
-
-
-
-
-
