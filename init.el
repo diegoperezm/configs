@@ -956,7 +956,7 @@ git log --pretty=oneline --abbrev-commit \
  (defun org-babel-execute:apl (body params)
   "Execute a block of apl code with org-babel."
   (message "executing apl source code block")
-  (org-babel-eval "apl -s --echoCIN --rawCIN" body))
+  (org-babel-eval "apl --silent --noCONT --echoCIN --rawCIN --OFF" body))
 
 
 
