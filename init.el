@@ -1,6 +1,6 @@
-(require 'package) 
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-initialize) 
+(package-initialize)
 
 (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize))
 
@@ -13,6 +13,8 @@
 (set-selection-coding-system  'utf-8)
 (prefer-coding-system         'utf-8)
 
+(setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;; This is only needed once, near the top of the file
 (eval-when-compile
@@ -24,7 +26,7 @@
 ;; (when (string-equal system-type "windows-nt")
 ;;  (global-set-key (kbd "<apps>") 'execute-extended-command))
 (global-set-key (kbd "<menu>") 'execute-extended-command)
-(global-prettify-symbols-mode 1) 
+(global-prettify-symbols-mode 1)
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
@@ -74,7 +76,6 @@
  '(default-input-method "APL-Z")
  '(electric-indent-mode nil)
  '(evil-esc-delay 0)
- '(global-whitespace-mode t)
  '(midnight-mode t)
  '(org-bullets-bullet-list (quote ("◉" "▸" "▸" "▸" "▸" "▸" "▸" "▸" "▸" "▸")))
  '(org-capture-templates
@@ -117,7 +118,7 @@ git log --pretty=oneline --abbrev-commit --after=\"%<%Y-%m-%d 00:00>\"  --before
  '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
  '(package-selected-packages
    (quote
-    (keycast avy gnu-apl-mode multiple-cursors company-web json-mode dmenu zerodark-theme linum-relative highlight-blocks highlight-parentheses yasnippet-snippets which-key web-mode use-package unicode-fonts symon sudo-edit spaceline slack rainbow-delimiters racket-mode pretty-mode prettier-js popup-kill-ring pomodoro poet-theme pkg-info pdf-tools paredit ox-gfm org-trello org-bullets markdown-mode mark-multiple magit key-chord js2-mode gif-screencast geiser exwm exec-path-from-shell evil-terminal-cursor-changer emmet-mode el-get dimmer desktop+ demo-it buffer-move bitlbee beacon auto-complete)))
+    (keycast avy gnu-apl-mode multiple-cursors company-web json-mode dmenu zerodark-theme linum-relative highlight-blocks highlight-parentheses yasnippet-snippets which-key web-mode use-package unicode-fonts symon sudo-edit spaceline slack rainbow-delimiters racket-mode pretty-mode prettier-js popup-kill-ring pomodoro poet-theme pkg-info pdf-tools paredit ox-gfm org-trello org-bullets markdown-mode mark-multiple magit key-chord js2-mode gif-screencast geiser exwm exec-path-from-shell evil-terminal-cursor-changer emmet-mode el-get dimmer desktop+ demo-it buffer-move bitlbee auto-complete)))
  '(popup-scroll-bar-background-face t t)
  '(prettier-js-args (quote ("--parser" "babylon")))
  '(scroll-bar-mode nil)
@@ -126,7 +127,7 @@ git log --pretty=oneline --abbrev-commit --after=\"%<%Y-%m-%d 00:00>\"  --before
  '(yas-global-mode 1)
  '(yas-indent-line (quote (none)) nil nil "Customized with use-package yasnippet"))
 
- 
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -152,7 +153,7 @@ git log --pretty=oneline --abbrev-commit --after=\"%<%Y-%m-%d 00:00>\"  --before
             (face-remap-add-relative 'default :background "black")))
 
 (defun prettify-list (l &optional merge)
-  "Takes two lists and interleaves the (optional) second between each element of the first.  Used to 
+  "Takes two lists and interleaves the (optional) second between each element of the first.  Used to
 create multi-character sequences for use with prettify-symbols mode.  If not supplied, MERGE defaults
 to '(Br . Bl)"
   (let ((merge (or merge '(Br . Bl)))
@@ -174,18 +175,18 @@ uses the prettify-list default."
 (defun prettify-set ()
   (setq prettify-symbols-alist
 		`(
-	          (".map"         . ,(prettify-string   " ↦ "))  ; 21A6 
+	          (".map"         . ,(prettify-string   " ↦ "))  ; 21A6
 		  (".assign"      . ,(prettify-string   " ↤ "))  ; 21A4
 		  (".pop"         . ,(prettify-string   " ↥ "))  ;  21A5
 		  (".push"        . ,(prettify-string   " ↧ "))  ; 21A7
-		  ("Math.sqrt"    . ,(prettify-string   " √ "))  ; 221A   
-		  ("Math.floor"   . ,(prettify-string   " ⌊ "))  ; 230A   
-                  (".forEach"     . ,(prettify-string   " ¨"))  ; #x00A8   
+		  ("Math.sqrt"    . ,(prettify-string   " √ "))  ; 221A
+		  ("Math.floor"   . ,(prettify-string   " ⌊ "))  ; 230A
+                  (".forEach"     . ,(prettify-string   " ¨"))  ; #x00A8
 		  (".filter"      . ,(prettify-string   " σ"))  ; #x03C3 / greek small letter sigma
 		  ("Math.random"  . ,(prettify-string   " ⍰"))  ; 2370  / APL functional symbol quad question
 		  ("length"       . ,(prettify-string   "ρ"))  ; 03C1  / greek small letter rho
 		  ("index"        . ,(prettify-string   "ι"))  ; 03B9  / greek small letter iota
-		  (".reduce"      . ,(prettify-string   " /"))  ; #x002F  
+		  (".reduce"      . ,(prettify-string   " /"))  ; #x002F
 		  (".transition"  . ,(prettify-string   " δ"))  ; #x03B4 / greek small letter delta
  		  ("elem2"        . ,(prettify-string   "∈2"))  ; 2208
  		  ("elem3"        . ,(prettify-string   "∈3"))  ; 2208
@@ -237,9 +238,10 @@ uses the prettify-list default."
   :ensure t
   :custom
   (yas-indent-line '(none))
-  (yas-global-mode 1)) 
+  (yas-global-mode 1))
 
 (ac-config-default)
+(setq ac-auto-start 5)
 (setq ac-auto-show-menu 0.8)
  (add-to-list 'ac-dictionary-directories
 	     "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
@@ -523,10 +525,10 @@ uses the prettify-list default."
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; briefly highlight cursor when changing buffer 
-(use-package beacon
-  :ensure t
-  :config
-  (beacon-mode 1))
+; (use-package beacon
+;  :ensure t
+;  :config
+;  (beacon-mode 1))
 
 (use-package popup-kill-ring
   :ensure t
@@ -569,8 +571,11 @@ uses the prettify-list default."
      (dot    . t)))
 (add-to-list 'org-emphasis-alist '("*" (:foreground "yellow")))
 (add-to-list 'org-src-lang-modes '("js2"       .  js2))
+
 (add-to-list 'org-structure-template-alist
- '("apl"  "#+NAME:?\n#+BEGIN_SRC apl\n\n#+END_SRC"))
+ '("el"  "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC"))
+(add-to-list 'org-structure-template-alist
+ '("apl"  "#+BEGIN_SRC apl\n?\n)OFF\n#+END_SRC"))
 (add-to-list 'org-structure-template-alist
  '("sh"  "#+NAME: \n#+BEGIN_SRC sh\n?\n#+END_SRC"))
 (add-to-list 'org-structure-template-alist
@@ -784,6 +789,8 @@ git log --pretty=oneline --abbrev-commit \
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
+(global-set-key (kbd "C-c C-r") 'exwm-randr-refresh)
+
 
 (defun my-web-mode-hook ()
 "Hooks for Web mode."
@@ -931,33 +938,39 @@ git log --pretty=oneline --abbrev-commit \
   (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
   (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
 
-(use-package whitespace
-  :config
-  ;; add spaces?
-  (setq whitespace-style '(face empty tabs  lines-tail trailing)
-	whitespace-line-column 80)
-  (global-whitespace-mode t)
-  :custom-face
-  (trailing-whitespace ((t (:background "red1"))))
-  (whitespace-big-indent ((t (:background "blue" :foreground "firebrick1"))))
-  (whitespace-empty ((t (:background "#da8547" :foreground "#3e4451"))))
-  (whitespace-line ((t (:foreground "#ff6c6b"))))
-  (whitespace-trailing ((t (:background "#ff6c6e" :foreground "#282c34" :inverse-video nil :weight bold)))))
-
-
-; '(trailing-whitespace ((t (:background "red"))))
-; '(whitespace-big-indent ((t (:background "red1" :foreground "firebrick1"))))
-; '(whitespace-empty ((t (:background "#da8547" :foreground "#3e4451"))))
-; '(whitespace-line ((t (:foreground "#ff6c6b"))))
-; '(whitespace-trailing ((t (:background "#ff6c6e" :foreground "#282c34" :inverse-video nil :weight bold))))
-
-
-
+;;; not sure about this one
  (defun org-babel-execute:apl (body params)
   "Execute a block of apl code with org-babel."
   (message "executing apl source code block")
   (org-babel-eval "apl --silent --noCONT --echoCIN --rawCIN --OFF" body))
 
+
+(use-package popup
+ :ensure t)
+
+;; add some shotcuts in popup menu mode
+(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t
+     )))
+
+(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
 
 
 ; start-process-shell-command
