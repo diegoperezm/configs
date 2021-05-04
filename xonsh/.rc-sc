@@ -1,0 +1,19 @@
+$PROMPT = ' {BOLD_WHITE}>{RESET} '
+xontrib load argcomplete jedi kitty readable-traceback
+$READABLE_TRACE_STRIP_PATH_ENV=True
+$READABLE_TRACE_REVERSE=True
+$READABLE_TRACE_ON_TTY=True
+$AUTO_SUGGEST=False
+$PRETTY_PRINT_RESULTS=True
+$XONSH_STYLE_OVERRIDES["Token.Comment"]             = "#ffff00"
+$XONSH_STYLE_OVERRIDES["Token.Literal.String"]      = "#ffff00"
+$XONSH_STYLE_OVERRIDES["Token.Literal.Number"]      = "#ff7f00"
+$XONSH_STYLE_OVERRIDES["Token.Operator"]            = "#ffffff"
+# $INDENT
+# $MULTILINE_PROMPT
+# $AUTO_SUGGEST_IN_COMPLETIONS=True
+# $VI_MODE=False
+# $XONSH_AUTOPAIR=True
+# $COLOR_INPUT=False
+
+
