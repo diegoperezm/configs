@@ -1,0 +1,156 @@
+$PROMPT = '{BOLD_RED}[{RESET}{env_name}{BOLD_RED}][{RESET}{BOLD_YELLOW}{cwd}{BOLD_RED}][{RESET}{branch_color}{curr_branch:{}}{BOLD_RED}]\n└>{RESET} '
+# $XONSH_COLOR_STYLE = 'solarized-dark'
+xontrib load argcomplete jedi kitty readable-traceback
+$AUTO_SUGGEST_IN_COMPLETIONS=True
+$READABLE_TRACE_STRIP_PATH_ENV=True
+$READABLE_TRACE_REVERSE=True
+$READABLE_TRACE_ON_TTY=True
+$PRETTY_PRINT_RESULTS
+$XONSH_AUTOPAIR=True
+# $COLOR_INPUT=False
+$XONSH_STYLE_OVERRIDES["Token.Comment"]             = "#ffff00"
+$XONSH_STYLE_OVERRIDES["Token.Literal.String"]      = "#ffff00"
+$XONSH_STYLE_OVERRIDES["Token.Literal.Number"]      = "#ff7f00"
+$XONSH_STYLE_OVERRIDES["Token.Operator"]            = "#ffffff"
+
+# $XONSH_STYLE_OVERRIDES["Token.Comment.Single"]      = "#ffff00"
+# $XONSH_STYLE_OVERRIDES["Token.Comment.Preproc"]     = "#ffff00"
+# $XONSH_STYLE_OVERRIDES["Token.Comment.Special"]     = "#ffff00"
+# $XONSH_STYLE_OVERRIDES["Token.Comment.Multiline"]   = "#ffff00"
+# $XONSH_STYLE_OVERRIDES["Token.Comment.Hashbang"]    = "#ffff00"
+# $XONSH_STYLE_OVERRIDES["Token.Comment.PreprocFile"] = "#ffff00"
+#
+# $XONSH_STYLE_OVERRIDES:
+# ---------------------- 
+#
+#  pygments.token.Token 
+#  $XONSH_STYLE_OVERRIDES[Token.Keyword] = '#ff0000'
+#
+#  pygments token name (string) 
+#  $XONSH_STYLE_OVERRIDES['Token.Keyword'] = '#ff0000'
+#
+#  ptk style name (string) 
+#  $XONSH_STYLE_OVERRIDES['pygments.keyword'] = '#ff0000'
+#
+# ---------------------- 
+# 
+# xonfig colors: 
+#
+# RED
+# BLUE
+# CYAN
+# BLACK
+# GREEN
+# RESET
+# Token
+# WHITE
+# PURPLE
+# YELLOW
+# DEFAULT
+# BOLD_RED
+# BOLD_CYAN
+# BOLD_GREEN
+# BOLD_PURPLE
+# BOLD_YELLOW
+# INTENSE_RED
+# INTENSE_BLUE
+# INTENSE_CYAN
+# INTENSE_BLACK
+# INTENSE_GREEN
+# INTENSE_WHITE
+# INTENSE_PURPLE
+# INTENSE_YELLOW
+# BACKGROUND_YELLOW
+# BACKGROUND_RED
+# BACKGROUND_BLACK__BOLD_YELLOW
+# BACKGROUND_BLUE
+# BACKGROUND_BLACK
+# BACKGROUND_GREEN
+# BLACK__BACKGROUND_RED
+#  Token.Error
+#  Token.Name  
+#  Token.Text   
+#  Token.Other 
+#  Token.Escape
+#  Token.Generic
+#  Token.Keyword
+#  Token.Literal
+#  Token.Name.Tag
+#  Token.Operator
+#  Token.Name.Class
+#  Token.Name.Label
+#  Token.Name.Other
+#  Token.Name.Entity
+#  Token.Punctuation
+#  Token.Generic.Emph
+#  Token.Keyword.Type
+#  Token.Literal.Date
+#  Token.Name.Builtin
+#  Token.PTK.Aborting
+#  Token.Generic.Error
+#  Token.Name.Constant
+#  Token.Name.Function
+#  Token.Name.Property
+#  Token.Name.Variable
+#  Token.Operator.Word
+#  Token.Generic.Output
+#  Token.Generic.Prompt
+#  Token.Generic.Strong
+#  Token.Keyword.Pseudo
+#  Token.Literal.Number
+#  Token.Name.Attribute
+#  Token.Name.Decorator
+#  Token.Name.Exception
+#  Token.Name.Namespace
+#  Token.Generic.Deleted
+#  Token.Generic.Heading
+#  Token.Text.Whitespace
+#  WHITE__BACKGROUND_RED
+#  BLUE__BACKGROUND_GREEN
+#  Token.Generic.Inserted
+#  Token.Keyword.Constant
+#  Token.Keyword.Reserved
+#  WHITE__BACKGROUND_BLUE
+#  BLACK__BACKGROUND_GREEN
+#  Token.Generic.Traceback
+#  Token.Keyword.Namespace
+#  BACKGROUND_BLACK__YELLOW
+#  BLACK__BACKGROUND_YELLOW
+#  Token.Generic.Subheading
+#  Token.Literal.Number.Bin
+#  Token.Literal.Number.Hex
+#  Token.Literal.Number.Oct
+#  Token.Literal.String.Doc
+#  Token.PTK.AutoSuggestion
+#  Token.PTK.CompletionMenu
+#  Token.Keyword.Declaration
+#  Token.Literal.String.Char
+#  Token.Name.Builtin.Pseudo
+#  Token.Name.Function.Magic
+#  Token.Name.Variable.Class
+#  Token.Name.Variable.Magic
+#  Token.PTK.Scrollbar.Arrow
+#  BACKGROUND_BLACK__BOLD_RED
+#  Token.Literal.Number.Float
+#  Token.Literal.String.Affix
+#  Token.Literal.String.Other
+#  Token.Literal.String.Regex
+#  Token.Name.Variable.Global
+#  Token.PTK.Scrollbar.Button
+#  Token.Literal.String.Double
+#  Token.Literal.String.Escape
+#  Token.Literal.String.Single
+#  Token.Literal.String.Symbol
+#  Token.Literal.Number.Integer
+#  Token.Literal.String.Heredoc
+#  Token.Name.Variable.Instance
+#  Token.Literal.String.Backtick
+#  Token.Literal.String.Interpol
+#  Token.Literal.String.Delimiter
+#  Token.PTK.Scrollbar.Background
+#  Token.Literal.Number.Integer.Long
+#  Token.PTK.CompletionMenu.Completion
+#  Token.PTK.CompletionMenu.Completion.Current
+# 
+#
+# https://github.com/xonsh/xonsh/issues/1821 
